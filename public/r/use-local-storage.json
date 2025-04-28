@@ -1,0 +1,13 @@
+{
+  "name": "use-local-storage",
+  "type": "registry:hook",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "hooks/use-local-storage.ts",
+      "content": "import * as React from \"react\";\r\n\r\nexport function useLocalStorage<T>(\r\n\tkey: string,\r\n\tinitialValue: T,\r\n): [T, (value: T | ((prev: T) => T)) => void] {\r\n\tconst parseJSON = (value: string | null) => {\r\n\t\ttry {\r\n\t\t\treturn value ? JSON.parse(value) : null;\r\n\t\t} catch (error) {\r\n\t\t\tconsole.warn(\"Failed to parse localStorage value\", error);\r\n\t\t\treturn null;\r\n\t\t}\r\n\t};\r\n\r\n\tconst [storedValue, setStoredValue] = React.useState<T>(() => {\r\n\t\tconst item = window.localStorage.getItem(key);\r\n\t\treturn item !== null ? (parseJSON(item) ?? initialValue) : initialValue;\r\n\t});\r\n\r\n\tconst setValue = React.useCallback(\r\n\t\t(value: T | ((prev: T) => T)) => {\r\n\t\t\tsetStoredValue((prev) => {\r\n\t\t\t\tconst newValue = value instanceof Function ? value(prev) : value;\r\n\t\t\t\twindow.localStorage.setItem(key, JSON.stringify(newValue));\r\n\t\t\t\treturn newValue;\r\n\t\t\t});\r\n\t\t},\r\n\t\t[key],\r\n\t);\r\n\r\n\tReact.useEffect(() => {\r\n\t\tconst handleStorageChange = (event: StorageEvent) => {\r\n\t\t\tif (event.key === key) {\r\n\t\t\t\tsetStoredValue(\r\n\t\t\t\t\tevent.newValue\r\n\t\t\t\t\t\t? (parseJSON(event.newValue) ?? initialValue)\r\n\t\t\t\t\t\t: initialValue,\r\n\t\t\t\t);\r\n\t\t\t}\r\n\t\t};\r\n\r\n\t\twindow.addEventListener(\"storage\", handleStorageChange);\r\n\t\treturn () => {\r\n\t\t\twindow.removeEventListener(\"storage\", handleStorageChange);\r\n\t\t};\r\n\t}, [key, initialValue]);\r\n\r\n\treturn [storedValue, setValue];\r\n}\r\n",
+      "type": "registry:hook",
+      "target": ""
+    }
+  ]
+}

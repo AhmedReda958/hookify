@@ -1,0 +1,13 @@
+{
+  "name": "use-debounced-callback",
+  "type": "registry:hook",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "hooks/use-debounced-callback.ts",
+      "content": "import * as React from \"react\";\r\n\r\nexport function useDebouncedCallback<T extends (...args: any[]) => any>(\r\n\tcallback: T,\r\n\tdelay = 500,\r\n) {\r\n\tconst timeoutRef = React.useRef<NodeJS.Timeout>();\r\n\r\n\treturn React.useCallback(\r\n\t\t(...args: Parameters<T>) => {\r\n\t\t\tif (timeoutRef.current) {\r\n\t\t\t\tclearTimeout(timeoutRef.current);\r\n\t\t\t}\r\n\r\n\t\t\ttimeoutRef.current = setTimeout(() => {\r\n\t\t\t\tcallback(...args);\r\n\t\t\t}, delay);\r\n\t\t},\r\n\t\t[callback, delay],\r\n\t);\r\n}\r\n",
+      "type": "registry:hook",
+      "target": ""
+    }
+  ]
+}

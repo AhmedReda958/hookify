@@ -1,0 +1,13 @@
+{
+  "name": "use-media-query",
+  "type": "registry:hook",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "hooks/use-media-query.ts",
+      "content": "import * as React from \"react\";\r\n\r\nexport function useMediaQuery(query: string) {\r\n\tconst [matches, setMatches] = React.useState(false);\r\n\r\n\tReact.useEffect(() => {\r\n\t\tconst mediaQuery = window.matchMedia(query);\r\n\t\tsetMatches(mediaQuery.matches);\r\n\r\n\t\tconst listener = (event: MediaQueryListEvent) => {\r\n\t\t\tsetMatches(event.matches);\r\n\t\t};\r\n\r\n\t\tmediaQuery.addEventListener(\"change\", listener);\r\n\r\n\t\treturn () => {\r\n\t\t\tmediaQuery.removeEventListener(\"change\", listener);\r\n\t\t};\r\n\t}, [query]);\r\n\r\n\treturn matches;\r\n}\r\n",
+      "type": "registry:hook",
+      "target": ""
+    }
+  ]
+}

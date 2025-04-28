@@ -1,0 +1,13 @@
+{
+  "name": "use-intersection-observer",
+  "type": "registry:hook",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "hooks/use-intersection-observer.ts",
+      "content": "import * as React from \"react\";\r\n\r\ninterface UseIntersectionObserverProps {\r\n\tthreshold?: number;\r\n\troot?: Element | null;\r\n\trootMargin?: string;\r\n}\r\n\r\nexport function useIntersectionObserver(\r\n\telementRef: React.RefObject<Element>,\r\n\t{\r\n\t\tthreshold = 0,\r\n\t\troot = null,\r\n\t\trootMargin = \"0%\",\r\n\t}: UseIntersectionObserverProps,\r\n): IntersectionObserverEntry | undefined {\r\n\tconst [entry, setEntry] = React.useState<IntersectionObserverEntry>();\r\n\r\n\tconst updateEntry = ([entry]: IntersectionObserverEntry[]): void => {\r\n\t\tsetEntry(entry);\r\n\t};\r\n\r\n\tReact.useEffect(() => {\r\n\t\tconst node = elementRef.current;\r\n\t\tconst isSupported = !!window.IntersectionObserver;\r\n\r\n\t\tif (!node || !isSupported) return;\r\n\r\n\t\tconst params = { threshold, root, rootMargin };\r\n\t\tconst observer = new IntersectionObserver(updateEntry, params);\r\n\r\n\t\tobserver.observe(node);\r\n\r\n\t\treturn () => observer.disconnect();\r\n\t}, [elementRef, threshold, root, rootMargin]);\r\n\r\n\treturn entry;\r\n}\r\n",
+      "type": "registry:hook",
+      "target": ""
+    }
+  ]
+}

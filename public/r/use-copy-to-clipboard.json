@@ -1,0 +1,13 @@
+{
+  "name": "use-copy-to-clipboard",
+  "type": "registry:hook",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "hooks/use-copy-to-clipboard.ts",
+      "content": "import { useState } from \"react\";\r\n\r\nexport function useCopyToClipboard({\r\n\ttimeout = 2000,\r\n\tonCopy,\r\n}: {\r\n\ttimeout?: number;\r\n\tonCopy?: (text: string) => void;\r\n} = {}) {\r\n\tconst [isCopied, setIsCopied] = useState(false);\r\n\r\n\tconst copyToClipboard = (value: string) => {\r\n\t\tif (typeof window === \"undefined\" || !navigator.clipboard.writeText) {\r\n\t\t\treturn;\r\n\t\t}\r\n\r\n\t\tif (!value) return;\r\n\r\n\t\tnavigator.clipboard.writeText(value).then(() => {\r\n\t\t\tsetIsCopied(true);\r\n\t\t\tonCopy?.(value);\r\n\t\t\tsetTimeout(() => {\r\n\t\t\t\tsetIsCopied(false);\r\n\t\t\t}, timeout);\r\n\t\t}, console.error);\r\n\t};\r\n\r\n\treturn { isCopied, copyToClipboard };\r\n}\r\n",
+      "type": "registry:hook",
+      "target": ""
+    }
+  ]
+}

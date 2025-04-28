@@ -1,0 +1,13 @@
+{
+  "name": "use-debounced-value",
+  "type": "registry:hook",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "hooks/use-debounced-value.ts",
+      "content": "import * as React from \"react\";\r\n\r\nexport function useDebouncedValue<T>(value: T, delay = 500) {\r\n\tconst [debouncedValue, setDebouncedValue] = React.useState<T>(value);\r\n\r\n\tReact.useEffect(() => {\r\n\t\tconst timer = setTimeout(() => {\r\n\t\t\tsetDebouncedValue(value);\r\n\t\t}, delay);\r\n\r\n\t\treturn () => {\r\n\t\t\tclearTimeout(timer);\r\n\t\t};\r\n\t}, [value, delay]);\r\n\r\n\treturn debouncedValue;\r\n}\r\n",
+      "type": "registry:hook",
+      "target": ""
+    }
+  ]
+}

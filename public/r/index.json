@@ -1,0 +1,79 @@
+[
+  {
+    "name": "use-copy-to-clipboard",
+    "type": "registry:hook",
+    "dependencies": [],
+    "files": [
+      {
+        "path": "hooks/use-copy-to-clipboard.ts",
+        "type": "registry:hook"
+      }
+    ]
+  },
+  {
+    "name": "use-debounced-callback",
+    "type": "registry:hook",
+    "dependencies": [],
+    "files": [
+      {
+        "path": "hooks/use-debounced-callback.ts",
+        "type": "registry:hook"
+      }
+    ]
+  },
+  {
+    "name": "use-debounced-value",
+    "type": "registry:hook",
+    "dependencies": [],
+    "files": [
+      {
+        "path": "hooks/use-debounced-value.ts",
+        "type": "registry:hook"
+      }
+    ]
+  },
+  {
+    "name": "use-intersection-observer",
+    "type": "registry:hook",
+    "dependencies": [],
+    "files": [
+      {
+        "path": "hooks/use-intersection-observer.ts",
+        "type": "registry:hook"
+      }
+    ]
+  },
+  {
+    "name": "use-interval",
+    "type": "registry:hook",
+    "dependencies": [],
+    "files": [
+      {
+        "path": "hooks/use-interval.ts",
+        "type": "registry:hook"
+      }
+    ]
+  },
+  {
+    "name": "use-local-storage",
+    "type": "registry:hook",
+    "dependencies": [],
+    "files": [
+      {
+        "path": "hooks/use-local-storage.ts",
+        "type": "registry:hook"
+      }
+    ]
+  },
+  {
+    "name": "use-media-query",
+    "type": "registry:hook",
+    "dependencies": [],
+    "files": [
+      {
+        "path": "hooks/use-media-query.ts",
+        "type": "registry:hook"
+      }
+    ]
+  }
+]
