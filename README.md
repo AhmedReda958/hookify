@@ -1,5 +1,3 @@
-![hookify](https://github.com/user-attachments/assets/9b867722-891e-4b9c-a00a-a94968927eb5)
-
 # hookify
 
 A collection of reusable React hooks that can be installed using the shadcn CLI.
